@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <div class="modal files-fragment">
+        <div class="modal-content">
+            <button type="button" class="close-popup close">Закрыть</button>
+            <div id="tableFragmentWrapper">
+                <table class="table" th:fragment="table-fragment">
+                    <tr>
+                        <th>Файл</th>
+                        <th>Размер</th>
+                    </tr>
+                    <tr th:each="file : ${files}">
+                        <td th:text="${file.getName()}"></td>
+                        <td th:text="${file.getSize() == null ? '<DIR>' : file.getClearSize()}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="static/js/DirectoryEntry.js"></script>
+    <link type="text/css" rel="stylesheet" media="all" href="static/css/layout.css">
+</head>
+<body>
+<h1>Директории и файлы</h1>
+<div>
+    <span>Новая директория</span>
+    <input id="newDirectoryPath" type="text" placeholder="/opt/tomcat/temp">
+    <button id="addToList" type="button">Добавить в список</button>
+</div>
+<div>
+    <h2>Список директорий и файлов</h2>
+    <table id="directoriesTable" class="table">
+        <tr>
+            <th>Дата</th>
+            <th>Базовая директория</th>
+            <th>Директорий</th>
+            <th>Файлов</th>
+            <th>Сумарный размер файлов</th>
+            <th></th>
+        </tr>
+        <tr th:each="directory : ${directories}">
+            <td th:text="${directory.getCreatedDate()}"></td>
+            <td th:text="${directory.getPath()}"></td>
+            <td th:text="${directory.getDirectoriesCount()}"></td>
+            <td th:text="${directory.getFilesCount()}"></td>
+            <td th:text="${directory.getClearSize()}"></td>
+            <td><button class="show-files" type="button" th:attr="path='directory/' + ${directory.getId()}">Файлы</button></td>
+        </tr>
+    </table>
+</div>
+<div th:replace="files :: body"></div>
+</body>
+</html>
